@@ -1,15 +1,22 @@
-﻿using Plugin.Geolocator;
+﻿using Newtonsoft.Json;
+using Plugin.Geolocator;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using XamarinLatinoMaps.Framework.Renderers;
+using XamarinLatinoMaps.Models;
+using XamarinLatinoMaps.Services;
 using XamarinLatinoMaps.ViewModels;
 
 namespace XamarinLatinoMaps
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+        private object apiService;
+
+        public MainPage()
 		{
 			InitializeComponent();
 
@@ -78,7 +85,56 @@ namespace XamarinLatinoMaps
             
             
         }
-      
+
+
+        private async void LoadApi(object sender, EventArgs e)
+        {
+           
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://restcountries.eu");
+            var url = "/rest/v2/all"; 
+              
+
+            var response = await client.GetAsync(url);
+
+
+            var answer = await response.Content.ReadAsStringAsync();
+
+
+            var list2 = JsonConvert.DeserializeObject<List<Land>>(answer);
+
+
+            List<Land> solucion = new List<Land>(list2);
+
+            Land tierra = solucion[0];
+
+
+
+
+            LogitudeLabel.Text = tierra.Latlng[0].ToString();
+
+            LatitudeLabel.Text = tierra.Latlng[1].ToString();
+
+         
+
+           
+
+            var pin = new CustomPin()
+            {
+                Position = new Position(tierra.Latlng[0], tierra.Latlng[1]),
+                Label = "wowowowo",
+                Address = "Hola amigos 3",
+                Type = PinType.SavedPin,
+                Url = "http://xamarin.com/about/"
+
+            };
+            MapView.Pins.Add(pin);
+
+
+
+        }
+
+
 
 
 

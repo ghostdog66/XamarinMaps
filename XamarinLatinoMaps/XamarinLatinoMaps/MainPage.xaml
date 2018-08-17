@@ -7,8 +7,8 @@
              xmlns:behaviors="clr-namespace:XamarinLatinoMaps.Framework.Behaviors;assembly=XamarinLatinoMaps"
              xmlns:renderers="clr-namespace:XamarinLatinoMaps.Framework.Renderers;assembly=XamarinLatinoMaps"
              x:Class="XamarinLatinoMaps.MainPage">
-    
-    <StackLayout>
+   
+        <StackLayout>
         <renderers:CustomMap x:Name="MapView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsShowingUser="True">
             <maps:Map.Behaviors>
                 <behaviors:MapBehavior ItemsSource="{Binding Items}"></behaviors:MapBehavior>
@@ -68,8 +68,31 @@
                    Grid.Column="1"
                         Grid.Row="1"/>
         </Grid>
+
+            <Button Text="Cargar API"  
+                         Clicked="LoadApi"  
+                         TextColor="Chocolate"  
+                         FontSize="Medium"
+                        />
+
         </StackLayout>
+
         
-        
+
+
+
+
+
+
+
+
+
+
+
+
     </StackLayout>
+
+
+
+
 </ContentPage>

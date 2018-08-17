@@ -10,38 +10,11 @@ using XamarinLatinoMaps.Services;
 
 namespace XamarinLatinoMaps.ViewModels
 {
-    public class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         private List<CoffeeShop> _items;
 
-        private ApiService apiService;
-
-        private bool isRefreshing;
-        private ObservableCollection<Land> lands;
-
-        public ObservableCollection<Land> Lands
-        {
-            get
-            {
-                return this.lands;
-            }
-            set
-            {
-                this.SetValue(ref this.lands, value);
-            }
-        }
-
-        public bool IsRefreshing
-        {
-            get
-            {
-                return this.isRefreshing;
-            }
-            set
-            {
-                this.SetValue(ref this.isRefreshing, value);
-            }
-        }
+       
 
         public List<CoffeeShop> Items
         {
